@@ -145,8 +145,7 @@ public class BoardManager : MonoBehaviour
         GameObject go = Instantiate(ChessmanPrefabs[index], GetTileCenter(x, y), Orientation) as GameObject;
         go.transform.SetParent(transform);
         ChessMen[x, y] = go.GetComponent<ChessMan>();
-        ChessMen[x, y].CurrentX = x;
-        ChessMen[x, y].CurrentY = y;
+        ChessMen[x, y].UpdatePosition(x, y);
         ActiveChessMan.Add(go);
     }
 
@@ -255,9 +254,14 @@ public class BoardManager : MonoBehaviour
     {
         if (SelectedChessMan.PossibleMove(x, y))
         {
-            ChessMen[SelectedChessMan.CurrentX, SelectedChessMan.CurrentX] = null;
+            //Set the Chess Man at the index of the Selected Chess Man to null because he will be moved out of that position
+            ChessMen[SelectedChessMan.CurrentX, SelectedChessMan.CurrentY] = null;
+            //Change the position of the Selected Chess Man to the position of the clicked tile
             SelectedChessMan.transform.position = GetTileCenter(x, y);
+            //Set the Chess Man at the index of Chess Men to that of the Selected ChessMan
             ChessMen[x, y] = SelectedChessMan;
+            //Update the Position Of the Selected ChessMan to the current position it now occupies
+            ChessMen[x,y].UpdatePosition(x, y);
         }
 
         SelectedChessMan = null;

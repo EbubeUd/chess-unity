@@ -13,4 +13,10 @@ public abstract class ChessMan : MonoBehaviour
     {
         return true;
     }
+
+    public void UpdatePosition(int x, int y)
+    {
+        CurrentX = x;
+        CurrentY = y;
+    }
 }
