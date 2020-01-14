@@ -46,7 +46,7 @@ public class BoardManager : MonoBehaviour
     /// <summary>
     /// True if it the turn of the white party to play
     /// </summary>
-    private bool isWhiteTurn;
+    private bool isWhiteTurn = true;
 
 
 
@@ -60,10 +60,6 @@ public class BoardManager : MonoBehaviour
         SpawnAllChessMen();
     }
 
-    /// <summary>
-    /// Holds the chess men that are active
-    /// </summary>
-    private List<GameObject> ActiveChessMan = new List<GameObject>();
 
     /// <summary>
     /// 
@@ -88,6 +84,12 @@ public class BoardManager : MonoBehaviour
             }
         }
     }
+
+
+    /// <summary>
+    /// Holds the chess men that are active
+    /// </summary>
+    private List<GameObject> ActiveChessMan = new List<GameObject>();
 
 
     /// <summary>
@@ -257,5 +259,7 @@ public class BoardManager : MonoBehaviour
             SelectedChessMan.transform.position = GetTileCenter(x, y);
             ChessMen[x, y] = SelectedChessMan;
         }
+
+        SelectedChessMan = null;
     }
 }
